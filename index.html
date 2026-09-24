@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Наша История Любви ❤️</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        rose: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            200: '#fecdd3',
+                            300: '#fda4af',
+                            400: '#fb7185',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                            800: '#9f1239',
+                            900: '#881337',
+                            950: '#4c0519',
+                        },
+                        velvet: '#1a0813',
+                        roseGold: '#e0a9af',
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        script: ['"Great Vibes"', 'cursive'],
+                        sans: ['"Montserrat"', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0d040a;
+            color: #fecdd3;
+            overflow-x: hidden;
+        }
+
+        .font-script {
+            font-family: 'Great Vibes', cursive;
+        }
+
+        .font-serif-title {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .glass-card {
+            background: rgba(255, 241, 242, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(251, 113, 133, 0.15);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .glass-card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card-hover:hover {
+            background: rgba(255, 241, 242, 0.07);
+            border-color: rgba(251, 113, 133, 0.35);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px 0 rgba(225, 29, 72, 0.15);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0d040a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4c0519;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #881337;
+        }
+
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+
+        #heart-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="relative selection:bg-rose-500 selection:text-white">
+
+    <canvas id="heart-canvas"></canvas>
+
+    <div class="fixed top-5 right-5 z-50 flex items-center gap-3">
+        <button id="music-toggle" class="glass-card p-3 rounded-full text-rose-300 hover:text-rose-100 hover:scale-110 transition-all flex items-center gap-2 group shadow-lg" title="Включить фоновую музыку">
+            <i data-lucide="music" class="w-5 h-5 animate-pulse"></i>
+            <span id="music-text" class="text-xs font-medium max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 whitespace-nowrap pr-0 group-hover:pr-1">Музыка</span>
+        </button>
+    </div>
+
+    <section class="min-h-screen relative flex flex-col justify-center items-center px-4 py-20 text-center overflow-hidden">
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-rose-900/30 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-1/4 left-1/3 w-[300px] h-[300px] bg-purple-900/20 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="relative z-20 max-w-5xl mx-auto space-y-6">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-rose-500/20 text-rose-300 text-sm tracking-wide animate-pulse-slow">
+                <i data-lucide="heart" class="w-4 h-4 fill-rose-400 text-rose-400"></i>
+                <span>История, созданная для нас</span>
+            </div>
+
+            <h1 class="text-6xl sm:text-7xl md:text-8xl font-script text-transparent bg-clip-text bg-gradient-to-r from-rose-200 via-rose-300 to-rose-100 drop-shadow-sm py-2">
+                Наша История Любви
+            </h1>
+
+            <p class="text-lg sm:text-xl font-serif-title italic text-rose-200/80 max-w-xl mx-auto font-light leading-relaxed">
+                «Каждая секунда с тобой — это бесценный подарок, который я бережно храню в своём сердце.»
+            </p>
+
+            <!-- Detailed Relationship Counter Box -->
+            <div class="pt-8">
+                <p class="text-xs uppercase tracking-widest text-rose-400/80 font-semibold mb-4">Мы вместе уже (с 28 августа 2025 года, 22:04):</p>
+                <div id="timer" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 max-w-4xl mx-auto">
+                    <div class="glass-card p-4 rounded-2xl flex flex-col items-center">
+                        <span id="years" class="text-3xl sm:text-4xl font-bold font-serif-title text-rose-200">1</span>
+                        <span class="text-xs text-rose-400/70 font-medium uppercase mt-1">Год</span>
+                    </div>
+                    <div class="glass-card p-4 rounded-2xl flex flex-col items-center">
+                        <span id="months" class="text-3xl sm:text-4xl font-bold font-serif-title text-rose-200">0</span>
+                        <span class="text-xs text-rose-400/70 font-medium uppercase mt-1">Месяцев</span>
+                    </div>
+                    <div class="glass-card p-4 rounded-2xl flex flex-col items-center">
+                        <span id="days" class="text-3xl sm:text-4xl font-bold font-serif-title text-rose-200">26</span>
+                        <span class="text-xs text-rose-400/70 font-medium uppercase mt-1">Дней</span>
+                    </div>
+                    <div class="glass-card p-4 rounded-2xl flex flex-col items-center">
+                        <span id="hours" class="text-3xl sm:text-4xl font-bold font-serif-title text-rose-200">00</span>
+                        <span class="text-xs text-rose-400/70 font-medium uppercase mt-1">Часов</span>
+                    </div>
+                    <div class="glass-card p-4 rounded-2xl flex flex-col items-center">
+                        <span id="minutes" class="text-3xl sm:text-4xl font-bold font-serif-title text-rose-200">00</span>
+                        <span class="text-xs text-rose-400/70 font-medium uppercase mt-1">Минут</span>
+                    </div>
+                    <div class="glass-card p-4 rounded-2xl flex flex-col items-center">
+                        <span id="seconds" class="text-3xl sm:text-4xl font-bold font-serif-title text-rose-200">00</span>
+                        <span class="text-xs text-rose-400/70 font-medium uppercase mt-1">Секунд</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Send Kiss Interactive Button -->
+            <div class="pt-8 flex flex-wrap justify-center gap-4">
+                <button id="btn-kiss" class="px-8 py-3.5 rounded-full bg-gradient-to-r from-rose-600 to-rose-500 text-white font-medium shadow-lg shadow-rose-950/50 hover:shadow-rose-600/30 hover:scale-105 active:scale-95 transition-all flex items-center gap-2">
+                    <i data-lucide="sparkles" class="w-5 h-5"></i>
+                    <span>Отправить Поцелуй</span>
+                </button>
+            </div>
+        </div>
+
+        <a href="#letter" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-rose-400/60 hover:text-rose-200 transition-colors animate-bounce">
+            <i data-lucide="chevron-down" class="w-8 h-8"></i>
+        </a>
+    </section>
+
+    <section id="letter" class="py-24 px-4 relative z-20 max-w-4xl mx-auto">
+        <div class="glass-card rounded-3xl p-6 sm:p-12 relative overflow-hidden">
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-rose-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="flex items-center gap-3 mb-6 border-b border-rose-500/20 pb-4">
+                <i data-lucide="mail-open" class="w-6 h-6 text-rose-400"></i>
+                <h2 class="text-2xl font-serif-title font-semibold text-rose-100">Письмо для Тебя</h2>
+            </div>
+
+            <div id="typewriter-container" class="font-serif-title text-lg sm:text-xl text-rose-100/90 leading-relaxed min-h-[160px] whitespace-pre-line italic">
+            </div>
+
+            <div class="mt-8 flex justify-between items-center pt-4 border-t border-rose-500/10">
+                <span class="text-xs text-rose-400/60 uppercase tracking-widest font-mono">Навсегда Твой</span>
+                <button id="retype-btn" class="text-xs text-rose-300 hover:text-rose-100 underline underline-offset-4 flex items-center gap-1">
+                    <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                    Перечитать
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 px-4 relative z-20 max-w-5xl mx-auto">
+        <div class="text-center mb-12 space-y-2">
+            <h2 class="text-4xl sm:text-5xl font-script text-rose-200">100 Причин Моей Любви</h2>
+            <p class="text-rose-300/70 text-sm font-light">Нажми на карточку или сгенерируй новое признание</p>
+        </div>
+
+        <div class="flex flex-col items-center">
+            <div id="reason-card" class="w-full max-w-md h-64 perspective-1000 cursor-pointer group">
+                <div id="card-inner" class="relative w-full h-full duration-700 transform-style-3d transition-transform">
+                    <div class="absolute inset-0 glass-card rounded-3xl p-8 flex flex-col items-center justify-center text-center backface-hidden border border-rose-500/30 group-hover:border-rose-400/60 shadow-xl">
+                        <div class="w-16 h-16 rounded-full bg-rose-500/10 flex items-center justify-center text-rose-400 mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="heart-handshake" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="font-serif-title text-2xl text-rose-100 font-medium">Причина № <span id="reason-num">1</span></h3>
+                        <p class="text-xs text-rose-300/60 uppercase tracking-wider mt-2">Нажми, чтобы открыть</p>
+                    </div>
+
+                    <div class="absolute inset-0 glass-card bg-rose-950/40 rounded-3xl p-8 flex flex-col items-center justify-center text-center backface-hidden rotate-y-180 border border-rose-400/40">
+                        <i data-lucide="quote" class="w-6 h-6 text-rose-400/40 mb-2"></i>
+                        <p id="reason-text" class="font-serif-title text-xl text-rose-100 italic leading-relaxed">
+                            Ты делаешь каждый мой день светлее просто тем, что ты есть.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 flex gap-4">
+                <button id="next-reason-btn" class="px-6 py-2.5 rounded-full glass-card hover:bg-rose-500/20 text-rose-200 hover:text-white text-sm font-medium transition-all flex items-center gap-2">
+                    <i data-lucide="shuffle" class="w-4 h-4"></i>
+                    <span>Другая причина</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 px-4 relative z-20 max-w-6xl mx-auto">
+        <div class="text-center mb-14 space-y-2">
+            <h2 class="text-4xl sm:text-5xl font-script text-rose-200">Галерея Наших Воспоминаний</h2>
+            <p class="text-rose-300/70 text-sm font-light">Самые тёплые и незабываемые моменты вместе</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Moment Card 1 -->
+            <div class="gallery-item glass-card glass-card-hover rounded-2xl overflow-hidden cursor-pointer group"
+                 data-title="Точка отсчёта" 
+                 data-desc="Особенный вечер 28 августа 2025 года в 22:04 — момент, с которого изменился весь мой мир." 
+                 data-img="photo_2026-09-24_21-44-26.jpg">
+                <div class="relative h-72 overflow-hidden">
+                    <img src="photo_2026-09-24_21-44-26.jpg" 
+                         alt="Точка отсчёта" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <span class="text-xs text-rose-300 font-medium tracking-widest uppercase">Август 2025</span>
+                        <h3 class="text-xl font-serif-title font-semibold text-white">Точка отсчёта</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Moment Card 2 -->
+            <div class="gallery-item glass-card glass-card-hover rounded-2xl overflow-hidden cursor-pointer group"
+                 data-title="Волшебство под огнями" 
+                 data-desc="Один из тех вечеров, когда вокруг всё сверкает, но смотреть хочется только на тебя." 
+                 data-img="photo_2026-03-29_22-00-31.jpg">
+                <div class="relative h-72 overflow-hidden">
+                    <img src="photo_2026-03-29_22-00-31.jpg" 
+                         alt="Волшебство под огнями" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <span class="text-xs text-rose-300 font-medium tracking-widest uppercase">Март 2026</span>
+                        <h3 class="text-xl font-serif-title font-semibold text-white">Волшебство под огнями</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Moment Card 3 -->
+            <div class="gallery-item glass-card glass-card-hover rounded-2xl overflow-hidden cursor-pointer group"
+                 data-title="Моё тихое счастье" 
+                 data-desc="Когда ты рядом, весь шум мира затихает, и остаются только наши объятия." 
+                 data-img="d0b316fe-6961-48bb-9fcb-185662c9e838.jpg">
+                <div class="relative h-72 overflow-hidden">
+                    <img src="d0b316fe-6961-48bb-9fcb-185662c9e838.jpg" 
+                         alt="Моё тихое счастье" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <span class="text-xs text-rose-300 font-medium tracking-widest uppercase">Сентябрь 2026</span>
+                        <h3 class="text-xl font-serif-title font-semibold text-white">Моё тихое счастье</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Moment Card 4 -->
+            <div class="gallery-item glass-card glass-card-hover rounded-2xl overflow-hidden cursor-pointer group"
+                 data-title="Летние моменты" 
+                 data-desc="Твоя улыбка освещает любой путь лучше самого яркого летнего солнца." 
+                 data-img="photo_4_2026-09-12_00-09-02.jpg">
+                <div class="relative h-72 overflow-hidden">
+                    <img src="photo_4_2026-09-12_00-09-02.jpg" 
+                         alt="Летние моменты" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <span class="text-xs text-rose-300 font-medium tracking-widest uppercase">Июль 2026</span>
+                        <h3 class="text-xl font-serif-title font-semibold text-white">Летние моменты</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Moment Card 5 -->
+            <div class="gallery-item glass-card glass-card-hover rounded-2xl overflow-hidden cursor-pointer group"
+                 data-title="Ночной город и мы" 
+                 data-desc="Бесконечные вечерние прогулки, задорный смех и самые горячие поцелуи." 
+                 data-img="photo_2025-11-28_20-23-53.jpg">
+                <div class="relative h-72 overflow-hidden">
+                    <img src="photo_2025-11-28_20-23-53.jpg" 
+                         alt="Ночной город и мы" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <span class="text-xs text-rose-300 font-medium tracking-widest uppercase">Ноябрь 2025</span>
+                        <h3 class="text-xl font-serif-title font-semibold text-white">Ночной город и мы</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Moment Card 6 -->
+            <div class="gallery-item glass-card glass-card-hover rounded-2xl overflow-hidden cursor-pointer group"
+                 data-title="Уютные полдни" 
+                 data-desc="Заботиться о тебе и проводить время вместе — моё самое любимое занятие." 
+                 data-img="photo_7_2026-09-12_00-09-02.jpg">
+                <div class="relative h-72 overflow-hidden">
+                    <img src="photo_7_2026-09-12_00-09-02.jpg" 
+                         alt="Уютные полдни" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <span class="text-xs text-rose-300 font-medium tracking-widest uppercase">Сентябрь 2026</span>
+                        <h3 class="text-xl font-serif-title font-semibold text-white">Уютные полдни</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Moment Card 7 -->
+            <div class="gallery-item glass-card glass-card-hover rounded-2xl overflow-hidden cursor-pointer group"
+                 data-title="Особый стиль" 
+                 data-desc="Тот самый кадр, где всё идеально совпало: настроение, стиль и мы в зеркале." 
+                 data-img="photo_2026-04-06_19-44-33.jpg">
+                <div class="relative h-72 overflow-hidden">
+                    <img src="photo_2026-04-06_19-44-33.jpg" 
+                         alt="Особый стиль" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <span class="text-xs text-rose-300 font-medium tracking-widest uppercase">Апрель 2026</span>
+                        <h3 class="text-xl font-serif-title font-semibold text-white">Особый стиль</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Moment Card 8 -->
+            <div class="gallery-item glass-card glass-card-hover rounded-2xl overflow-hidden cursor-pointer group"
+                 data-title="Связующие нити" 
+                 data-desc="Маленькие детали, которые всегда напоминают о нашей невидимой, но крепкой связи." 
+                 data-img="photo_2026-06-06_09-12-33.jpg">
+                <div class="relative h-72 overflow-hidden">
+                    <img src="photo_2026-06-06_09-12-33.jpg" 
+                         alt="Связующие нити" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <span class="text-xs text-rose-300 font-medium tracking-widest uppercase">Июнь 2026</span>
+                        <h3 class="text-xl font-serif-title font-semibold text-white">Связующие нити</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Moment Card 9 -->
+            <div class="gallery-item glass-card glass-card-hover rounded-2xl overflow-hidden cursor-pointer group"
+                 data-title="Тепло в деталях" 
+                 data-desc="Атмосфера уютных вечеров, забавные мелочи и бесконечная нежность." 
+                 data-img="photo_6_2026-09-12_00-09-02.jpg">
+                <div class="relative h-72 overflow-hidden">
+                    <img src="photo_6_2026-09-12_00-09-02.jpg" 
+                         alt="Тепло в деталях" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <span class="text-xs text-rose-300 font-medium tracking-widest uppercase">Сентябрь 2026</span>
+                        <h3 class="text-xl font-serif-title font-semibold text-white">Тепло в деталях</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Moment Card 10 -->
+            <div class="gallery-item glass-card glass-card-hover rounded-2xl overflow-hidden cursor-pointer group"
+                 data-title="Забавные кадры" 
+                 data-desc="Обожаю наши непринуждённые фото перед зеркалом и твоё классное чувство юмора." 
+                 data-img="photo_2025-10-10_20-51-05.jpg">
+                <div class="relative h-72 overflow-hidden">
+                    <img src="photo_2025-10-10_20-51-05.jpg" 
+                         alt="Забавные кадры" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <span class="text-xs text-rose-300 font-medium tracking-widest uppercase">Октябрь 2025</span>
+                        <h3 class="text-xl font-serif-title font-semibold text-white">Забавные кадры</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Moment Card 11 -->
+            <div class="gallery-item glass-card glass-card-hover rounded-2xl overflow-hidden cursor-pointer group"
+                 data-title="Красота для тебя" 
+                 data-desc="Твои счастливые глаза, когда в руках прекрасный букет — лучший подарок для меня." 
+                 data-img="photo_2025-10-23_17-32-51.jpg">
+                <div class="relative h-72 overflow-hidden">
+                    <img src="photo_2025-10-23_17-32-51.jpg" 
+                         alt="Красота для тебя" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <span class="text-xs text-rose-300 font-medium tracking-widest uppercase">Октябрь 2025</span>
+                        <h3 class="text-xl font-serif-title font-semibold text-white">Красота для тебя</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Moment Card 12 -->
+            <div class="gallery-item glass-card glass-card-hover rounded-2xl overflow-hidden cursor-pointer group"
+                 data-title="Следы любви" 
+                 data-desc="Куртка в твоей помаде и самые крепкие обнимашки перед прощанием." 
+                 data-img="photo_2025-10-23_19-07-35.jpg">
+                <div class="relative h-72 overflow-hidden">
+                    <img src="photo_2025-10-23_19-07-35.jpg" 
+                         alt="Следы любви" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <span class="text-xs text-rose-300 font-medium tracking-widest uppercase">Октябрь 2025</span>
+                        <h3 class="text-xl font-serif-title font-semibold text-white">Следы любви</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Moment Card 13 -->
+            <div class="gallery-item glass-card glass-card-hover rounded-2xl overflow-hidden cursor-pointer group"
+                 data-title="Осенний уют" 
+                 data-desc="Осень, прохладный вечер, но рядом с тобой всегда невероятно тепло." 
+                 data-img="photo_2025-11-05_19-31-01.jpg">
+                <div class="relative h-72 overflow-hidden">
+                    <img src="photo_2025-11-05_19-31-01.jpg" 
+                         alt="Осенний уют" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <span class="text-xs text-rose-300 font-medium tracking-widest uppercase">Ноябрь 2025</span>
+                        <h3 class="text-xl font-serif-title font-semibold text-white">Осенний уют</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Moment Card 14 -->
+            <div class="gallery-item glass-card glass-card-hover rounded-2xl overflow-hidden cursor-pointer group"
+                 data-title="Милые обнимашки" 
+                 data-desc="Твоё любимое яркое худи и самое уютное место во всей Вселенной." 
+                 data-img="photo_2025-11-25_16-18-44.jpg">
+                <div class="relative h-72 overflow-hidden">
+                    <img src="photo_2025-11-25_16-18-44.jpg" 
+                         alt="Милые обнимашки" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <span class="text-xs text-rose-300 font-medium tracking-widest uppercase">Ноябрь 2025</span>
+                        <h3 class="text-xl font-serif-title font-semibold text-white">Милые обнимашки</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Moment Card 15 -->
+            <div class="gallery-item glass-card glass-card-hover rounded-2xl overflow-hidden cursor-pointer group"
+                 data-title="Неоновый вечер" 
+                 data-desc="Мягкий фиолетовый свет, любимая атмосфера и капелька домашней магии." 
+                 data-img="photo_2025-12-11_11-00-11.jpg">
+                <div class="relative h-72 overflow-hidden">
+                    <img src="photo_2025-12-11_11-00-11.jpg" 
+                         alt="Неоновый вечер" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <span class="text-xs text-rose-300 font-medium tracking-widest uppercase">Декабрь 2025</span>
+                        <h3 class="text-xl font-serif-title font-semibold text-white">Неоновый вечер</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Moment Card 16 -->
+            <div class="gallery-item glass-card glass-card-hover rounded-2xl overflow-hidden cursor-pointer group"
+                 data-title="Весеннее солнце" 
+                 data-desc="Теплый весенний день, скамейка в парке и твои искренние, родные поцелуи." 
+                 data-img="photo_2026-04-05_21-09-28.jpg">
+                <div class="relative h-72 overflow-hidden">
+                    <img src="photo_2026-04-05_21-09-28.jpg" 
+                         alt="Весеннее солнце" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <span class="text-xs text-rose-300 font-medium tracking-widest uppercase">Апрель 2026</span>
+                        <h3 class="text-xl font-serif-title font-semibold text-white">Весеннее солнце</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="image-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="relative max-w-3xl w-full glass-card rounded-3xl overflow-hidden border border-rose-500/30">
+            <button id="modal-close" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-rose-600 transition-colors">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-1/2 h-64 md:h-auto relative">
+                    <img id="modal-img" src="" alt="Детали" class="w-full h-full object-cover">
+                </div>
+                <div class="md:w-1/2 p-6 md:p-8 flex flex-col justify-center">
+                    <span class="text-xs text-rose-400 font-semibold tracking-widest uppercase mb-1">Особый Момент</span>
+                    <h3 id="modal-title" class="text-2xl font-serif-title font-bold text-rose-100 mb-3"></h3>
+                    <p id="modal-desc" class="text-rose-200/80 font-serif-title text-lg italic leading-relaxed"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="py-12 text-center text-rose-300/50 text-sm relative z-20 border-t border-rose-500/10">
+        <p class="font-serif-title italic text-lg text-rose-200/80 mb-2">«Любить — значит видеть чудо, невидимое для других.»</p>
+        <p class="text-xs">Сделано с любовью специально для тебя ❤️</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        /* --- 1. Precise Date & Duration Counter (From August 28, 2025 22:04:00) --- */
+        const startDate = new Date(2025, 7, 28, 22, 4, 0);
+
+        function updateTimer() {
+            const now = new Date();
+            
+            let years = now.getFullYear() - startDate.getFullYear();
+            let months = now.getMonth() - startDate.getMonth();
+            let days = now.getDate() - startDate.getDate();
+            let hours = now.getHours() - startDate.getHours();
+            let minutes = now.getMinutes() - startDate.getMinutes();
+            let seconds = now.getSeconds() - startDate.getSeconds();
+
+            if (seconds < 0) {
+                seconds += 60;
+                minutes--;
+            }
+            if (minutes < 0) {
+                minutes += 60;
+                hours--;
+            }
+            if (hours < 0) {
+                hours += 24;
+                days--;
+            }
+            if (days < 0) {
+                const prevMonthLastDay = new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+                days += prevMonthLastDay;
+                months--;
+            }
+            if (months < 0) {
+                months += 12;
+                years--;
+            }
+
+            document.getElementById('years').innerText = Math.max(0, years);
+            document.getElementById('months').innerText = Math.max(0, months);
+            document.getElementById('days').innerText = String(Math.max(0, days)).padStart(2, '0');
+            document.getElementById('hours').innerText = String(Math.max(0, hours)).padStart(2, '0');
+            document.getElementById('minutes').innerText = String(Math.max(0, minutes)).padStart(2, '0');
+            document.getElementById('seconds').innerText = String(Math.max(0, seconds)).padStart(2, '0');
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        /* --- 2. Floating Heart Particle Engine --- */
+        const canvas = document.getElementById('heart-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        let particles = [];
+
+        class Particle {
+            constructor(x, y, isBurst = false) {
+                this.x = x || Math.random() * canvas.width;
+                this.y = y || (isBurst ? y : canvas.height + 20);
+                this.size = Math.random() * 12 + 8;
+                this.speedY = isBurst ? (Math.random() - 0.5) * 6 : -Math.random() * 1.5 - 0.5;
+                this.speedX = isBurst ? (Math.random() - 0.5) * 6 : Math.sin(Math.random() * Math.PI) * 0.8;
+                this.opacity = 1;
+                this.fade = isBurst ? Math.random() * 0.02 + 0.01 : Math.random() * 0.003 + 0.001;
+                this.color = `hsl(${Math.random() * 20 + 340}, 80%, ${Math.random() * 20 + 60}%)`;
+            }
+
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX;
+                this.opacity -= this.fade;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = Math.max(0, this.opacity);
+                ctx.fillStyle = this.color;
+                ctx.font = `${this.size}px serif`;
+                ctx.fillText('❤️', this.x, this.y);
+                ctx.restore();
+            }
+        }
+
+        function createBackgroundHearts() {
+            if (particles.length < 35 && Math.random() < 0.1) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            createBackgroundHearts();
+
+            for (let i = particles.length - 1; i >= 0; i--) {
+                particles[i].update();
+                particles[i].draw();
+                if (particles[i].opacity <= 0) {
+                    particles.splice(i, 1);
+                }
+            }
+            requestAnimationFrame(animateCanvas);
+        }
+        animateCanvas();
+
+        window.addEventListener('click', (e) => {
+            if (e.target.closest('button') || e.target.closest('.gallery-item')) return;
+            for (let i = 0; i < 5; i++) {
+                particles.push(new Particle(e.clientX, e.clientY, true));
+            }
+        });
+
+        /* --- 3. Interactive Kiss Button Effect --- */
+        document.getElementById('btn-kiss').addEventListener('click', (e) => {
+            const rect = e.target.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            for (let i = 0; i < 30; i++) {
+                particles.push(new Particle(centerX, centerY, true));
+            }
+        });
+
+        /* --- 4. Love Letter Typewriter Effect --- */
+        const letterText = `Моё любимое солнце,\n\nС 28 августа 2025 года каждый день наполнен особенным смыслом. Я осознаю всё сильнее, насколько мне повезло встретить тебя. Твоя улыбка освещает даже самые пасмурные дни, а твоя забота делает этот мир невероятно тёплым и уютным.\n\nСпасибо тебе за каждый общий смех, за поддержку, за наши тихие вечера и безумные мечты. Я хочу проходить этот путь рука об руку с тобой, создавая всё новые и новые прекрасные воспоминания.\n\nТы — моё вдохновение и моё счастье. ❤️`;
+
+        let typeIndex = 0;
+        const letterContainer = document.getElementById('typewriter-container');
+
+        function typeWriter() {
+            if (typeIndex < letterText.length) {
+                letterContainer.textContent += letterText.charAt(typeIndex);
+                typeIndex++;
+                setTimeout(typeWriter, 35);
+            }
+        }
+
+        document.getElementById('retype-btn').addEventListener('click', () => {
+            letterContainer.textContent = '';
+            typeIndex = 0;
+            typeWriter();
+        });
+
+        let typed = false;
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting && !typed) {
+                typed = true;
+                typeWriter();
+            }
+        }, { threshold: 0.3 });
+        observer.observe(document.getElementById('letter'));
+
+        /* --- 5. Interactive Reasons Cards --- */
+        const reasons = [
+            "Ты делаешь каждый мой день светлее просто тем, что ты есть.",
+            "Твой смех — мой самый любимый звук во всей Вселенной.",
+            "Рядом с тобой я могу быть настоящим собой.",
+            "Ты всегда знаешь, как поддержать меня в трудную минуту.",
+            "Твои обнимашки согревают лучше любого самого тёплого пледа.",
+            "Мне нравится, как ты искренне радуешься мелочам.",
+            "Твои глаза излучают невероятный свет и доброту.",
+            "С тобой даже простое молчание становится уютным и особенным.",
+            "Ты вдохновляешь меня становиться лучше с каждым днём."
+        ];
+
+        let currentReasonIdx = 0;
+        const cardInner = document.getElementById('card-inner');
+        const reasonNum = document.getElementById('reason-num');
+        const reasonText = document.getElementById('reason-text');
+        const cardContainer = document.getElementById('reason-card');
+
+        cardContainer.addEventListener('click', () => {
+            cardInner.classList.toggle('rotate-y-180');
+        });
+
+        document.getElementById('next-reason-btn').addEventListener('click', () => {
+            cardInner.classList.remove('rotate-y-180');
+            setTimeout(() => {
+                currentReasonIdx = (currentReasonIdx + 1) % reasons.length;
+                reasonNum.textContent = currentReasonIdx + 1;
+                reasonText.textContent = reasons[currentReasonIdx];
+            }, 300);
+        });
+
+        /* --- 6. Gallery Modal --- */
+        const modal = document.getElementById('image-modal');
+        const modalImg = document.getElementById('modal-img');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDesc = document.getElementById('modal-desc');
+
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', () => {
+                modalImg.src = item.dataset.img;
+                modalTitle.textContent = item.dataset.title;
+                modalDesc.textContent = item.dataset.desc;
+                modal.classList.remove('hidden');
+            });
+        });
+
+        document.getElementById('modal-close').addEventListener('click', () => {
+            modal.classList.add('hidden');
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.classList.add('hidden');
+        });
+
+        /* --- 7. Soft Ambient Web Audio Synthesizer --- */
+        let audioCtx = null;
+        let isPlaying = false;
+        let timerId = null;
+
+        function playSoftTone() {
+            if (!isPlaying) return;
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+            const notes = [261.63, 293.66, 329.63, 349.23, 392.00, 440.00];
+            const freq = notes[Math.floor(Math.random() * notes.length)];
+
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+            gain.gain.setValueAtTime(0, audioCtx.currentTime);
+            gain.gain.linearRampToValueAtTime(0.05, audioCtx.currentTime + 1.5);
+            gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 4);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            osc.start();
+            osc.stop(audioCtx.currentTime + 4.5);
+
+            timerId = setTimeout(playSoftTone, Math.random() * 2000 + 1500);
+        }
+
+        document.getElementById('music-toggle').addEventListener('click', () => {
+            isPlaying = !isPlaying;
+            const musicText = document.getElementById('music-text');
+
+            if (isPlaying) {
+                if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+                playSoftTone();
+                musicText.textContent = "Музыка: Вкл";
+            } else {
+                clearTimeout(timerId);
+                musicText.textContent = "Музыка: Выкл";
+            }
+        });
+    </script>
+</body>
+</html>
